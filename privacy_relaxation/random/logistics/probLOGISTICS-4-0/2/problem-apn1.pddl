@@ -9,8 +9,8 @@
 	obj13 - package
 	obj12 - package
 	pos1 - location
-	pos2 - location
-	cit2 - city
+	tru1 - truck
+	tru2 - truck
 
 	(:private
 		apn1 - airplane
@@ -21,9 +21,7 @@
 	(at obj11 pos1)
 	(at obj12 pos1)
 	(at obj13 pos1)
-	(at obj21 pos2)
-	(at obj22 pos2)
-	(at obj23 pos2)
+	(at tru1 pos1)
 )
 (:goal
 	(and

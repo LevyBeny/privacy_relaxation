@@ -9,11 +9,12 @@
 	obj13 - package
 	obj12 - package
 	pos1 - location
-	pos2 - location
-	cit2 - city
+	tru1 - truck
+	tru2 - truck
 
 	(:private
-		tru2 - truck
+		cit2 - city
+		pos2 - location
 	)
 )
 (:init
@@ -24,8 +25,9 @@
 	(at obj21 pos2)
 	(at obj22 pos2)
 	(at obj23 pos2)
-	(in-city tru2 pos2)
-	(in-city tru2 apt2)
+	(in-city tru2 pos2 cit2)
+	(in-city tru2 apt2 cit2)
+	(at tru1 pos1)
 )
 (:goal
 	(and
