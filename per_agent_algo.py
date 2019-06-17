@@ -1,14 +1,14 @@
 import random
 from copy import deepcopy
-
+import re
 
 # Returns agents pool dict --> key: agent, value: list of private objects
 def _create_agent_pool(parsed_problems):
     pool = {}
     for prob in parsed_problems:
-        pool[prob] = []
         if len(parsed_problems[prob]['private_objects']) == 0:
             continue
+        pool[prob] = []
         for i, priv_obj in enumerate(parsed_problems[prob]['private_objects']):
             pool[prob].append(priv_obj)
     return pool
@@ -44,6 +44,7 @@ def _delete_from_private_list(priv_obj, problem):
 def private_relaxation(parsed_problems):
     agents_pool = _create_agent_pool(parsed_problems)
     new_problems = parsed_problems
+    iteration_names = []
     while True:
         key_value = random.sample(agents_pool.items(), 1)[0]
         agent = key_value[0]
@@ -89,8 +90,11 @@ def private_relaxation(parsed_problems):
                         if prob == agent:
                             continue
                         new_problems[prob]['goal']['negative'].append(predicate)
-
-        yield new_problems
+        iteration_names.append(re.sub(r'\.pddl|problem-', '', agent))
+        iteration_name = str(iteration_names)
+        iteration_name = re.sub(r'\s|\[|\]|\\|\'', '', iteration_name)
+        iteration_name = re.sub(r',', '_', iteration_name)
+        yield iteration_name, new_problems
 
         if len(agents_pool) == 0:
             break

@@ -1,0 +1,4 @@
+0,  success, 27, 16,0.3635303
+tru2,  success, 28, 20,0.4047707
+tru2_tru1,  success, 27, 18,0.4285968
+tru2_tru1_apn1,  success, 27, 18,0.4448443

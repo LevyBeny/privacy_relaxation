@@ -38,6 +38,7 @@ def _delete_from_private_list(priv_obj, problem):
 def private_relaxation(parsed_problems):
     private_pool = _create_private_pool(parsed_problems)
     new_problems = parsed_problems
+    iteration = 1
     while True:
         key_value = random.sample(private_pool.items(), 1)[0]
         pool_key = key_value[0]
@@ -82,7 +83,8 @@ def private_relaxation(parsed_problems):
                         continue
                     new_problems[prob]['goal']['negative'].append(predicate)
 
-        yield new_problems
+        yield str(iteration), new_problems
+        iteration += 1
 
         if len(private_pool) == 0:
             break

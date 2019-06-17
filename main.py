@@ -1,12 +1,12 @@
 from parse_problem import process_problems
-from random_algo import private_relaxation
+from per_agent_algo import private_relaxation
 from utils import *
 import os
 
 # CONFIG
 domain_name = 'logistics'
 domain_path = './benchmarks/logistics00-factored'
-algo = 'random'
+algo = 'per_agent'
 planner_path = 'C:/Users/User/source/ma-strips/bin/Debug/GPPP.exe'
 
 # Loop over all problems in given domain
@@ -25,8 +25,8 @@ for problem_dir in os.listdir(os.fsencode(domain_path)):
     res = os.popen('{} {}'.format(planner_path, new_problem_path)).read()
 
     # Each iteration is relaxing a privacy by the relaxing algorithm
-    for i, new_problems in enumerate(private_relaxation(parsed_problems)):
-        new_problem_path = './privacy_relaxation/' + algo + '/' + domain_name + '/' + problem_name + '/' + str(i + 1)
+    for iteration_name, new_problems in private_relaxation(parsed_problems):
+        new_problem_path = './privacy_relaxation/' + algo + '/' + domain_name + '/' + problem_name + '/' + iteration_name
 
         # Write the new relaxed problem and domain files
         write_problems(original_problem_path, new_problem_path, domain_name, problem_name, new_problems)

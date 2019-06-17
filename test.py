@@ -18,16 +18,16 @@ for problem_dir in os.listdir(os.fsencode(domain_path)):
 
     print("Working on problem {}...".format(problem_name))
 
-    # Copy original problem
-    new_problem_path = './privacy_relaxation/' + algo + '/' + domain_name + '/' + problem_name + '/0'
-    write_problems(original_problem_path, new_problem_path, domain_name, problem_name, parsed_problems)
+    # # Copy original problem
+    # new_problem_path = './privacy_relaxation/' + algo + '/' + domain_name + '/' + problem_name + '/0'
+    # write_problems(original_problem_path, new_problem_path, domain_name, problem_name, parsed_problems)
 
     # # Run Planner on original problem
     # res = os.popen('{} {}'.format(planner_path, new_problem_path)).read()
 
     # Each iteration is relaxing a privacy by the relaxing algorithm
-    for i, new_problems in enumerate(private_relaxation(parsed_problems)):
-        new_problem_path = './privacy_relaxation/' + algo + '/' + domain_name + '/' + problem_name + '/' + str(i + 1)
+    for i, new_problems in private_relaxation(parsed_problems):
+        new_problem_path = './privacy_relaxation/' + algo + '/' + domain_name + '/' + problem_name + '/' + str(i)
 
         # Write the new relaxed problem and domain files
         write_problems(original_problem_path, new_problem_path, domain_name, problem_name, new_problems)

@@ -1,0 +1,6 @@
+0,  success, 51, 25,0.8660166
+tru4,  success, 55, 32,1.8891095
+tru4_tru3,  success, 56, 37,3.2443465
+tru4_tru3_tru1,  success, 54, 35,10.0955368
+tru4_tru3_tru1_tru2,  success, 51, 35,13.9781695
+tru4_tru3_tru1_tru2_apn1,  success, 53, 40,6.4035117
