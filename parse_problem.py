@@ -48,17 +48,22 @@ def parse_problem(problem_filename):
             #     pass
             elif t == ':objects':
                 group.pop(0)
-                raw_objects = group[:-1]
+                if group[-1][0] == ':private':
+                    raw_objects = group[:-1]
+                else:
+                    raw_objects = group
                 objects = []
                 for i in range(0, len(raw_objects), 3):
                     objects.append(raw_objects[i:i+3])
                 problem_dict['public_objects'] = objects
-
-                raw_private_objects = group[-1][1:]
-                private_objects =[]
-                for i in range(0, len(raw_private_objects), 3):
-                    private_objects.append(raw_private_objects[i:i+3])
-                problem_dict['private_objects'] = private_objects
+                if group[-1][0] == ':private':
+                    raw_private_objects = group[-1][1:]
+                    private_objects =[]
+                    for i in range(0, len(raw_private_objects), 3):
+                        private_objects.append(raw_private_objects[i:i+3])
+                    problem_dict['private_objects'] = private_objects
+                else:
+                    problem_dict['private_objects'] = []
             elif t == ':init':
                 group.pop(0)
                 problem_dict['init'] = group
