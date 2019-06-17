@@ -23,11 +23,10 @@
 	(at tru1 pos1)
 )
 (:goal
-	(and
-		(at obj11 apt1)
-		(at obj23 pos1)
-		(at obj13 apt1)
-		(at obj21 pos1)
+	(and    (at obj11 apt1)
+		    (at obj23 pos1)
+		    (at obj13 apt1)
+		    (at obj21 pos1)
 	)
 )
 )

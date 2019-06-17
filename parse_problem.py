@@ -92,8 +92,7 @@ def split_propositions(group, pos, neg, name, part):
 def process_problems(dir_path):
     parsed_problems = {}
 
-    directory = os.fsencode(dir_path)
-    for file in os.listdir(directory):
+    for file in os.listdir(os.fsencode(dir_path)):
         filename = os.fsdecode(file)
         if 'domain' in filename:
             continue
