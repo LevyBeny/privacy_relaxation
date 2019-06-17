@@ -1,5 +1,5 @@
 from parse_problem import process_problems
-from random_algo import private_relaxation
+from per_agent_algo import private_relaxation
 from utils import *
 import os
 
@@ -12,7 +12,7 @@ planner_path = 'C:/Users/User/source/ma-strips/bin/Debug/GPPP.exe'
 # Loop over all problems in given domain
 for problem_dir in os.listdir(os.fsencode(domain_path)):
     problem_name = os.fsdecode(problem_dir)
-    problem_name = 'probLOGISTICS-11-1'
+    problem_name = 'probLOGISTICS-4-0'
     original_problem_path = domain_path + '/' + problem_name
     parsed_problems = process_problems(original_problem_path)
 
