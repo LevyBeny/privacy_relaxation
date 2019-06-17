@@ -1,5 +1,5 @@
 from parse_problem import process_problems
-from per_agent_algo import private_relaxation
+from per_num_predicates_algo import private_relaxation
 from utils import *
 import os
 
