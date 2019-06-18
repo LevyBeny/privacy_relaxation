@@ -2,6 +2,7 @@ import random
 from copy import deepcopy
 
 
+# Returns for given agent and private object the number of predicates that will turn public
 def _get_num_predicates(priv_obj, problem_name, problems):
     res = 0
     for predicate in problems[problem_name]['init']:
@@ -11,6 +12,7 @@ def _get_num_predicates(priv_obj, problem_name, problems):
     return res
 
 
+# Retrieve the next private object to make public
 def _get_next_object(problems):
     max_num_predicates = -1
     max_object = None
@@ -25,6 +27,7 @@ def _get_next_object(problems):
     return max_num_predicates, max_prob, max_object
 
 
+# Check if given agent's private predicate can turn public if you turn given object public
 def _is_public_predicate(obj_name, predicate, problem):
     if predicate[0] == 'not':
         _predicate = predicate[1]
@@ -41,6 +44,7 @@ def _is_public_predicate(obj_name, predicate, problem):
     return True
 
 
+# Delete given private object fron the given agent's problem
 def _delete_from_private_list(priv_obj, problem):
     i = 0
     for obj in problem['private_objects']:
@@ -50,10 +54,15 @@ def _delete_from_private_list(priv_obj, problem):
     problem['private_objects'].pop(i)
 
 
+# Generator for creating the problem with the relaxed privacy
 def private_relaxation(parsed_problems):
     new_problems = parsed_problems
     while True:
         num_predicates, problem_name, selected_object = _get_next_object(new_problems)
+
+        # Stopping condition
+        if problem_name:
+            break
 
         new_problems = deepcopy(new_problems)
 
@@ -89,5 +98,6 @@ def private_relaxation(parsed_problems):
                     if prob == problem_name:
                         continue
                     new_problems[prob]['goal']['negative'].append(predicate)
+
         iteration_name = str(num_predicates) + '_' + selected_object[0]
         yield iteration_name, new_problems

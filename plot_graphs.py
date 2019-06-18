@@ -6,6 +6,7 @@ import re
 
 def _plot_graph(file_path, title, df):
     fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(13, 10))
+    plt.subplots_adjust(hspace=0.3)
     fig.suptitle(title.capitalize(), fontsize=20)
 
     df[['plan_length']].plot(ax=axes[0], color='b', marker='o')
@@ -13,15 +14,15 @@ def _plot_graph(file_path, title, df):
     df[['makespan']].plot(ax=axes[1], color='r', marker='*')
     axes[1].set_title("Makespan")
     df[['time']].plot(ax=axes[2], color='g', marker='^')
-    axes[2].set_title("Time")
+    axes[2].set_title("Time to Solve (sec)")
 
     plt.savefig(file_path)
 
 
-algo = 'random'
+algo = 'per_agent'
 results_path = './{}_results'.format(algo)
 
-# Loop over all results in for the given algo
+# Loop over all results in for the given algorithm results path
 for res_file in os.listdir(os.fsencode(results_path)):
     res_name = os.fsdecode(res_file)
     df = pd.read_csv(results_path + '/' + res_name,

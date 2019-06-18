@@ -2,6 +2,7 @@ import random
 from copy import deepcopy
 import re
 
+
 # Returns agents pool dict --> key: agent, value: list of private objects
 def _create_agent_pool(parsed_problems):
     pool = {}
@@ -14,7 +15,7 @@ def _create_agent_pool(parsed_problems):
     return pool
 
 
-# Check if given predicate is public
+# Check if given agent's private predicate can turn public if you turn given object public
 def _is_public_predicate(obj_name, predicate, problem):
     if predicate[0] == 'not':
         _predicate = predicate[1]
@@ -41,11 +42,13 @@ def _delete_from_private_list(priv_obj, problem):
     problem['private_objects'].pop(i)
 
 
+# Generator for creating the problem with the relaxed privacy
 def private_relaxation(parsed_problems):
     agents_pool = _create_agent_pool(parsed_problems)
     new_problems = parsed_problems
-    iteration_names = []
+    iterations = []
     while True:
+        # sample from pool
         key_value = random.sample(agents_pool.items(), 1)[0]
         agent = key_value[0]
         agent_private_objects = key_value[1]
@@ -90,11 +93,14 @@ def private_relaxation(parsed_problems):
                         if prob == agent:
                             continue
                         new_problems[prob]['goal']['negative'].append(predicate)
-        iteration_names.append(re.sub(r'\.pddl|problem-', '', agent))
-        iteration_name = str(iteration_names)
+
+        iterations.append(re.sub(r'\.pddl|problem-', '', agent))
+        iteration_name = str(iterations)
         iteration_name = re.sub(r'\s|\[|\]|\\|\'', '', iteration_name)
         iteration_name = re.sub(r',', '_', iteration_name)
+
         yield iteration_name, new_problems
 
+        # Stopping condition
         if len(agents_pool) == 0:
             break

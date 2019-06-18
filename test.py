@@ -29,11 +29,11 @@ for problem_dir in os.listdir(os.fsencode(domain_path)):
     for i, new_problems in private_relaxation(parsed_problems):
         new_problem_path = './privacy_relaxation/' + algo + '/' + domain_name + '/' + problem_name + '/' + str(i)
 
-        # Write the new relaxed problem and domain files
-        write_problems(original_problem_path, new_problem_path, domain_name, problem_name, new_problems)
-
-        # Run planner on new relaxed problem
-        res = os.popen('{} {}'.format(planner_path, new_problem_path)).read()
+        # # Write the new relaxed problem and domain files
+        # write_problems(original_problem_path, new_problem_path, domain_name, problem_name, new_problems)
+        #
+        # # Run planner on new relaxed problem
+        # res = os.popen('{} {}'.format(planner_path, new_problem_path)).read()
 
     # result_file_path = './results/' + problem_name + '.txt'
     # copyfile('./Results.txt', result_file_path)

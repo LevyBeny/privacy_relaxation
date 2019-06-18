@@ -2,6 +2,7 @@ import random
 from copy import deepcopy
 
 
+# Returns private objects pool dict --> key: object_name, value: tuple of (problem name,the private object)
 def _create_private_pool(parsed_problems):
     pool = {}
     for prob in parsed_problems:
@@ -10,6 +11,7 @@ def _create_private_pool(parsed_problems):
     return pool
 
 
+# Check if given agent's private predicate can turn public if you turn given object public
 def _is_public_predicate(obj_name, predicate, problem):
     if predicate[0] == 'not':
         _predicate = predicate[1]
@@ -26,6 +28,7 @@ def _is_public_predicate(obj_name, predicate, problem):
     return True
 
 
+# Delete given private object from given problem
 def _delete_from_private_list(priv_obj, problem):
     i = 0
     for obj in problem['private_objects']:
@@ -35,11 +38,13 @@ def _delete_from_private_list(priv_obj, problem):
     problem['private_objects'].pop(i)
 
 
+# Generator for creating the problem with the relaxed privacy
 def private_relaxation(parsed_problems):
     private_pool = _create_private_pool(parsed_problems)
     new_problems = parsed_problems
     iteration = 1
     while True:
+        # sample from pool
         key_value = random.sample(private_pool.items(), 1)[0]
         pool_key = key_value[0]
         problem_name = key_value[1][0]
@@ -55,7 +60,7 @@ def private_relaxation(parsed_problems):
             new_problems[prob]['public_objects'].append(selected_object)
 
         # delete the new public object from relevant agent's private objects
-        _delete_from_private_list(selected_object,new_problems[problem_name])
+        _delete_from_private_list(selected_object, new_problems[problem_name])
 
         # update relevant init predicates
         for predicate in new_problems[problem_name]['init']:
