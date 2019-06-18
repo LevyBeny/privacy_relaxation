@@ -1,12 +1,12 @@
 from parse_problem import process_problems
-from per_agent_algo import private_relaxation
+from per_num_predicates_algo import private_relaxation
 from utils import *
 import os
 
 # CONFIG
 domain_name = 'logistics'
 domain_path = './benchmarks/logistics00-factored'
-algo = 'per_agent'
+algo = 'per_num_predicates_algo'
 planner_path = 'C:/Users/User/source/ma-strips/bin/Debug/GPPP.exe'
 
 # Loop over all problems in given domain

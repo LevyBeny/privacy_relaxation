@@ -19,7 +19,7 @@ def _plot_graph(file_path, title, df):
     plt.savefig(file_path)
 
 
-algo = 'per_agent'
+algo = 'per_num_predicates'
 results_path = './{}_results'.format(algo)
 
 # Loop over all results in for the given algorithm results path

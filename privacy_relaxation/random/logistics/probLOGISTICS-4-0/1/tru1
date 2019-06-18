@@ -1,0 +1,2 @@
+(define (problem probLOGISTICS-4-0) (:domain logistics)
+(:objects
