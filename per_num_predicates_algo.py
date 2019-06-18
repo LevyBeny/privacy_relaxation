@@ -57,11 +57,12 @@ def _delete_from_private_list(priv_obj, problem):
 # Generator for creating the problem with the relaxed privacy
 def private_relaxation(parsed_problems):
     new_problems = parsed_problems
+    i = 1
     while True:
         num_predicates, problem_name, selected_object = _get_next_object(new_problems)
 
         # Stopping condition
-        if problem_name:
+        if problem_name is None:
             break
 
         new_problems = deepcopy(new_problems)
@@ -99,5 +100,6 @@ def private_relaxation(parsed_problems):
                         continue
                     new_problems[prob]['goal']['negative'].append(predicate)
 
-        iteration_name = str(num_predicates) + '_' + selected_object[0]
+        iteration_name = str(i) + '_' + str(num_predicates) + '_' + selected_object[0]
+        i += 1
         yield iteration_name, new_problems
